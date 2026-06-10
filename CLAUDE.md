@@ -35,3 +35,9 @@ npm install -D vitest @testing-library/react @testing-library/jest-dom
 - `index.html` — Vite의 HTML 템플릿, `<div id="root">` 포함
 - `vite.config.ts` — `@vitejs/plugin-react` 사용 (Babel 기반 Fast Refresh)
 - `tsconfig.json` — `tsconfig.app.json`(src 대상)과 `tsconfig.node.json`(vite 설정 대상)을 참조하는 복합 프로젝트 구조
+
+## 게임 아키텍처 원칙
+
+Phase별 상세 설계는 `docs/design/phaseN.md` 패턴으로 관리한다.
+새 Phase 작업 전 해당 파일을 먼저 읽는다.
+전체 목록은 [`docs/design/README.md`](docs/design/README.md)에서 확인한다.
