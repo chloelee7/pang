@@ -283,10 +283,10 @@ export class Game {
       return !picked;
     });
 
-    // 플레이어 ↔ 풍선
+    // 플레이어 ↔ 풍선 (스프라이트 여백 제외한 히트박스 사용)
     if (!this.player.isInvincible()) {
       const hit = this.balloons.some(b =>
-        circleRect(b.x, b.y, b.radius, p.x, p.y, p.width, p.height)
+        circleRect(b.x, b.y, b.radius, p.hitX, p.hitY, p.hitWidth, p.hitHeight)
       );
       if (hit) {
         if (this.player.hasBarrier) {

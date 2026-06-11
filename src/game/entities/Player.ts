@@ -12,11 +12,20 @@ const FRAME_H = 110;
 const WALK_FRAMES = [0, 1, 2, 3];
 const ANIM_SPEED  = 0.12; // 프레임 간격 (초)
 
+// 스프라이트 여백을 제외한 실제 충돌 영역
+const HIT_SHRINK_X = 9; // 좌우 각 9px 제거 → 42 → 24px
+const HIT_SHRINK_Y = 5; // 위 5px 제거 → 52 → 47px (발끝 포함)
+
 export class Player {
   x: number;
   y: number;
   readonly width  = PLAYER_WIDTH;
   readonly height = PLAYER_HEIGHT;
+
+  get hitX()      { return this.x + HIT_SHRINK_X; }
+  get hitY()      { return this.y + HIT_SHRINK_Y; }
+  get hitWidth()  { return this.width  - HIT_SHRINK_X * 2; }
+  get hitHeight() { return this.height - HIT_SHRINK_Y; }
   private hitTimer   = 0;
   hasBarrier         = false;
   private facing: 'left' | 'right' = 'right';
