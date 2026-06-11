@@ -44,10 +44,10 @@ export class Balloon {
       this.vy = -BALLOON_BOUNCE_SPEED[this.level];
     }
 
-    // 천장 반사
+    // 천장 반사: 고정 속도로 내려보내 가속 누적 방지
     if (this.y - this.radius <= 0) {
       this.y  = this.radius;
-      this.vy = Math.abs(this.vy);
+      this.vy = BALLOON_BOUNCE_SPEED[this.level];
     }
 
     if (this.x - this.radius <= 0) {
@@ -62,10 +62,13 @@ export class Balloon {
 
   split(): Balloon[] {
     if (this.level === 0) return [];
-    return [
-      new Balloon(this.x, this.y, this.level - 1, -1),
-      new Balloon(this.x, this.y, this.level - 1,  1),
-    ];
+    const cl = this.level - 1;
+    const b1 = new Balloon(this.x, this.y, cl, -1);
+    const b2 = new Balloon(this.x, this.y, cl,  1);
+    // 원작 팡처럼 분열 즉시 위로 발사 — vy=0 출발로 인한 돌발 가속 방지
+    b1.vy = -BALLOON_BOUNCE_SPEED[cl];
+    b2.vy = -BALLOON_BOUNCE_SPEED[cl];
+    return [b1, b2];
   }
 
   render(ctx: CanvasRenderingContext2D, images?: GameImages) {
